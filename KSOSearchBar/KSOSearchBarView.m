@@ -75,10 +75,7 @@ static CGFloat const kSubviewMargin = 8.0;
     BOOL retval = [self.textField resignFirstResponder];
     
     if (retval) {
-        [self setNeedsLayout];
-        [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:1.0 initialSpringVelocity:0.1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-            [self layoutIfNeeded];
-        } completion:nil];
+        
     }
     
     return retval;
