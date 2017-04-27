@@ -8,12 +8,77 @@
 
 /* Begin PBXBuildFile section */
 		07E577FA1EB2595C007687E8 /* KSOSearchBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 07E577F81EB2595C007687E8 /* KSOSearchBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07E578051EB25AD7007687E8 /* KSOSearchBarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 07E578031EB25AD7007687E8 /* KSOSearchBarView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07E578061EB25AD7007687E8 /* KSOSearchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E578041EB25AD7007687E8 /* KSOSearchBarView.m */; };
+		07E5780F1EB25B95007687E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E5780E1EB25B95007687E8 /* main.m */; };
+		07E578121EB25B95007687E8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E578111EB25B95007687E8 /* AppDelegate.m */; };
+		07E578151EB25B95007687E8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E578141EB25B95007687E8 /* ViewController.m */; };
+		07E578181EB25B95007687E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07E578161EB25B95007687E8 /* Main.storyboard */; };
+		07E5781A1EB25B95007687E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07E578191EB25B95007687E8 /* Assets.xcassets */; };
+		07E5781D1EB25B95007687E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07E5781B1EB25B95007687E8 /* LaunchScreen.storyboard */; };
+		07E578241EB25E29007687E8 /* Ditko.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E578231EB25E29007687E8 /* Ditko.framework */; };
+		07E578261EB25E2E007687E8 /* Stanley.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E578251EB25E2E007687E8 /* Stanley.framework */; };
+		07E578281EB25E39007687E8 /* Ditko.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E578271EB25E39007687E8 /* Ditko.framework */; };
+		07E578291EB25E39007687E8 /* Ditko.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07E578271EB25E39007687E8 /* Ditko.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07E5782C1EB25E3E007687E8 /* Stanley.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E5782B1EB25E3E007687E8 /* Stanley.framework */; };
+		07E5782D1EB25E3E007687E8 /* Stanley.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07E5782B1EB25E3E007687E8 /* Stanley.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07E5782E1EB25E42007687E8 /* KSOSearchBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E577F51EB2595C007687E8 /* KSOSearchBar.framework */; };
+		07E5782F1EB25E42007687E8 /* KSOSearchBar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07E577F51EB2595C007687E8 /* KSOSearchBar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07E578331EB25EE7007687E8 /* KSOFontAwesomeExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E578321EB25EE7007687E8 /* KSOFontAwesomeExtensions.framework */; };
+		07E578351EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E578341EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework */; };
+		07E578361EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07E578341EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		07E578301EB25E42007687E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07E577EC1EB2595C007687E8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07E577F41EB2595C007687E8;
+			remoteInfo = "KSOSearchBar-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		07E5782A1EB25E3A007687E8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				07E5782F1EB25E42007687E8 /* KSOSearchBar.framework in Embed Frameworks */,
+				07E578291EB25E39007687E8 /* Ditko.framework in Embed Frameworks */,
+				07E5782D1EB25E3E007687E8 /* Stanley.framework in Embed Frameworks */,
+				07E578361EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		07E577F51EB2595C007687E8 /* KSOSearchBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOSearchBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07E577F81EB2595C007687E8 /* KSOSearchBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOSearchBar.h; sourceTree = "<group>"; };
-		07E577F91EB2595C007687E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07E577F91EB2595C007687E8 /* KSOSearchBar-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KSOSearchBar-iOS-Info.plist"; sourceTree = "<group>"; };
+		07E578011EB25A18007687E8 /* KSOSearchBar-Info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KSOSearchBar-Info.h"; sourceTree = "<group>"; };
+		07E578031EB25AD7007687E8 /* KSOSearchBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOSearchBarView.h; sourceTree = "<group>"; };
+		07E578041EB25AD7007687E8 /* KSOSearchBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOSearchBarView.m; sourceTree = "<group>"; };
+		07E5780B1EB25B95007687E8 /* Demo-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		07E5780E1EB25B95007687E8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		07E578101EB25B95007687E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		07E578111EB25B95007687E8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		07E578131EB25B95007687E8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		07E578141EB25B95007687E8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		07E578171EB25B95007687E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		07E578191EB25B95007687E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		07E5781C1EB25B95007687E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		07E5781E1EB25B95007687E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07E578231EB25E29007687E8 /* Ditko.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ditko.framework; path = "Vendor/Ditko/build/Debug-iphoneos/Ditko.framework"; sourceTree = "<group>"; };
+		07E578251EB25E2E007687E8 /* Stanley.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stanley.framework; path = "Vendor/Stanley/build/Debug-iphoneos/Stanley.framework"; sourceTree = "<group>"; };
+		07E578271EB25E39007687E8 /* Ditko.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ditko.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07E5782B1EB25E3E007687E8 /* Stanley.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Stanley.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07E578321EB25EE7007687E8 /* KSOFontAwesomeExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KSOFontAwesomeExtensions.framework; path = "Vendor/KSOFontAwesomeExtensions/build/Debug-iphoneos/KSOFontAwesomeExtensions.framework"; sourceTree = "<group>"; };
+		07E578341EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOFontAwesomeExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,6 +86,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07E578331EB25EE7007687E8 /* KSOFontAwesomeExtensions.framework in Frameworks */,
+				07E578261EB25E2E007687E8 /* Stanley.framework in Frameworks */,
+				07E578241EB25E29007687E8 /* Ditko.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07E578081EB25B95007687E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07E5782E1EB25E42007687E8 /* KSOSearchBar.framework in Frameworks */,
+				07E578281EB25E39007687E8 /* Ditko.framework in Frameworks */,
+				07E5782C1EB25E3E007687E8 /* Stanley.framework in Frameworks */,
+				07E578351EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -31,7 +110,9 @@
 			isa = PBXGroup;
 			children = (
 				07E577F71EB2595C007687E8 /* KSOSearchBar */,
+				07E5780C1EB25B95007687E8 /* Demo-iOS */,
 				07E577F61EB2595C007687E8 /* Products */,
+				07E578221EB25E29007687E8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -39,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				07E577F51EB2595C007687E8 /* KSOSearchBar.framework */,
+				07E5780B1EB25B95007687E8 /* Demo-iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -47,9 +129,65 @@
 			isa = PBXGroup;
 			children = (
 				07E577F81EB2595C007687E8 /* KSOSearchBar.h */,
-				07E577F91EB2595C007687E8 /* Info.plist */,
+				07E578021EB25AC7007687E8 /* Source */,
+				07E578001EB25A03007687E8 /* Supporting Files */,
 			);
 			path = KSOSearchBar;
+			sourceTree = "<group>";
+		};
+		07E578001EB25A03007687E8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				07E577F91EB2595C007687E8 /* KSOSearchBar-iOS-Info.plist */,
+				07E578011EB25A18007687E8 /* KSOSearchBar-Info.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		07E578021EB25AC7007687E8 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				07E578031EB25AD7007687E8 /* KSOSearchBarView.h */,
+				07E578041EB25AD7007687E8 /* KSOSearchBarView.m */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		07E5780C1EB25B95007687E8 /* Demo-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				07E578101EB25B95007687E8 /* AppDelegate.h */,
+				07E578111EB25B95007687E8 /* AppDelegate.m */,
+				07E578131EB25B95007687E8 /* ViewController.h */,
+				07E578141EB25B95007687E8 /* ViewController.m */,
+				07E578161EB25B95007687E8 /* Main.storyboard */,
+				07E578191EB25B95007687E8 /* Assets.xcassets */,
+				07E5781B1EB25B95007687E8 /* LaunchScreen.storyboard */,
+				07E5781E1EB25B95007687E8 /* Info.plist */,
+				07E5780D1EB25B95007687E8 /* Supporting Files */,
+			);
+			path = "Demo-iOS";
+			sourceTree = "<group>";
+		};
+		07E5780D1EB25B95007687E8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				07E5780E1EB25B95007687E8 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		07E578221EB25E29007687E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				07E578341EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework */,
+				07E578321EB25EE7007687E8 /* KSOFontAwesomeExtensions.framework */,
+				07E5782B1EB25E3E007687E8 /* Stanley.framework */,
+				07E578271EB25E39007687E8 /* Ditko.framework */,
+				07E578251EB25E2E007687E8 /* Stanley.framework */,
+				07E578231EB25E29007687E8 /* Ditko.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -60,15 +198,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				07E577FA1EB2595C007687E8 /* KSOSearchBar.h in Headers */,
+				07E578051EB25AD7007687E8 /* KSOSearchBarView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		07E577F41EB2595C007687E8 /* KSOSearchBar */ = {
+		07E577F41EB2595C007687E8 /* KSOSearchBar-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 07E577FD1EB2595C007687E8 /* Build configuration list for PBXNativeTarget "KSOSearchBar" */;
+			buildConfigurationList = 07E577FD1EB2595C007687E8 /* Build configuration list for PBXNativeTarget "KSOSearchBar-iOS" */;
 			buildPhases = (
 				07E577F01EB2595C007687E8 /* Sources */,
 				07E577F11EB2595C007687E8 /* Frameworks */,
@@ -79,10 +218,29 @@
 			);
 			dependencies = (
 			);
-			name = KSOSearchBar;
+			name = "KSOSearchBar-iOS";
 			productName = KSOSearchBar;
 			productReference = 07E577F51EB2595C007687E8 /* KSOSearchBar.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		07E5780A1EB25B95007687E8 /* Demo-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07E5781F1EB25B95007687E8 /* Build configuration list for PBXNativeTarget "Demo-iOS" */;
+			buildPhases = (
+				07E578071EB25B95007687E8 /* Sources */,
+				07E578081EB25B95007687E8 /* Frameworks */,
+				07E578091EB25B95007687E8 /* Resources */,
+				07E5782A1EB25E3A007687E8 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07E578311EB25E42007687E8 /* PBXTargetDependency */,
+			);
+			name = "Demo-iOS";
+			productName = "Demo-iOS";
+			productReference = 07E5780B1EB25B95007687E8 /* Demo-iOS.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -90,10 +248,15 @@
 		07E577EC1EB2595C007687E8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = KSO;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Kosoku Interactive, LLC.";
 				TargetAttributes = {
 					07E577F41EB2595C007687E8 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+					};
+					07E5780A1EB25B95007687E8 = {
 						CreatedOnToolsVersion = 8.3.2;
 						ProvisioningStyle = Automatic;
 					};
@@ -105,13 +268,15 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 07E577EB1EB2595C007687E8;
 			productRefGroup = 07E577F61EB2595C007687E8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				07E577F41EB2595C007687E8 /* KSOSearchBar */,
+				07E577F41EB2595C007687E8 /* KSOSearchBar-iOS */,
+				07E5780A1EB25B95007687E8 /* Demo-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -124,6 +289,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		07E578091EB25B95007687E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07E5781D1EB25B95007687E8 /* LaunchScreen.storyboard in Resources */,
+				07E5781A1EB25B95007687E8 /* Assets.xcassets in Resources */,
+				07E578181EB25B95007687E8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -131,10 +306,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07E578061EB25AD7007687E8 /* KSOSearchBarView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07E578071EB25B95007687E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07E578151EB25B95007687E8 /* ViewController.m in Sources */,
+				07E578121EB25B95007687E8 /* AppDelegate.m in Sources */,
+				07E5780F1EB25B95007687E8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		07E578311EB25E42007687E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07E577F41EB2595C007687E8 /* KSOSearchBar-iOS */;
+			targetProxy = 07E578301EB25E42007687E8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		07E578161EB25B95007687E8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07E578171EB25B95007687E8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		07E5781B1EB25B95007687E8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07E5781C1EB25B95007687E8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		07E577FB1EB2595C007687E8 /* Debug */ = {
@@ -243,11 +456,20 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = KSOSearchBar/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/Ditko/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Vendor/Stanley/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Vendor/KSOFontAwesomeExtensions/build/Debug-iphoneos",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/KSOSearchBar/KSOSearchBar-iOS-Info.plist";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/KSOSearchBar/KSOSearchBar-Info.h";
+				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kosoku.KSOSearchBar;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kosoku.ksosearchbar;
+				PRODUCT_NAME = KSOSearchBar;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -260,12 +482,43 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = KSOSearchBar/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/Ditko/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Vendor/Stanley/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Vendor/KSOFontAwesomeExtensions/build/Debug-iphoneos",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/KSOSearchBar/KSOSearchBar-iOS-Info.plist";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/KSOSearchBar/KSOSearchBar-Info.h";
+				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kosoku.KSOSearchBar;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kosoku.ksosearchbar;
+				PRODUCT_NAME = KSOSearchBar;
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		07E578201EB25B95007687E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Demo-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kosoku.Demo-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		07E578211EB25B95007687E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Demo-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kosoku.Demo-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -281,13 +534,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		07E577FD1EB2595C007687E8 /* Build configuration list for PBXNativeTarget "KSOSearchBar" */ = {
+		07E577FD1EB2595C007687E8 /* Build configuration list for PBXNativeTarget "KSOSearchBar-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				07E577FE1EB2595C007687E8 /* Debug */,
 				07E577FF1EB2595C007687E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07E5781F1EB25B95007687E8 /* Build configuration list for PBXNativeTarget "Demo-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07E578201EB25B95007687E8 /* Debug */,
+				07E578211EB25B95007687E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

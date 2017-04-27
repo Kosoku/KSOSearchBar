@@ -1,5 +1,5 @@
 //
-//  KSOSearchBar.h
+//  KSOSearchBarView.h
 //  KSOSearchBar
 //
 //  Created by William Towe on 4/27/17.
@@ -15,12 +15,15 @@
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for KSOSearchBar.
-FOUNDATION_EXPORT double KSOSearchBarVersionNumber;
+NS_ASSUME_NONNULL_BEGIN
 
-//! Project version string for KSOSearchBar.
-FOUNDATION_EXPORT const unsigned char KSOSearchBarVersionString[];
+@interface KSOSearchBarView : UIView
 
-// In this header, you should import all the public headers of your framework using statements like #import <KSOSearchBar/PublicHeader.h>
+@property (copy,nonatomic,nullable) NSString *prompt;
+@property (strong,nonatomic,null_resettable) UIColor *promptTextColor UI_APPEARANCE_SELECTOR;
+@property (assign,nonatomic) BOOL showsScopeBar;
+@property (copy,nonatomic) NSArray *scopeBarItems;
 
-#import <KSOSearchBar/KSOSearchBarView.h>
+@end
+
+NS_ASSUME_NONNULL_END

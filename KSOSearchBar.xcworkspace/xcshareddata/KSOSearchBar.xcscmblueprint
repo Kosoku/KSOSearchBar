@@ -1,0 +1,36 @@
+{
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C94B06A26B26F3DFAC67E018206B5755A8E083DD" : 9223372036854775807,
+    "95DFEE02B27284838A8FA3A07714FEA27B4CE167" : 9223372036854775807,
+    "F498E775B877B20503564CBDCDC72C5B66674364" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "FF84BA99-6942-4CC5-853C-B73954AD8C30",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C94B06A26B26F3DFAC67E018206B5755A8E083DD" : "KSOSearchBar\/Vendor\/Stanley\/",
+    "95DFEE02B27284838A8FA3A07714FEA27B4CE167" : "KSOSearchBar\/Vendor\/Ditko\/",
+    "F498E775B877B20503564CBDCDC72C5B66674364" : "KSOSearchBar\/Vendor\/KSOFontAwesomeExtensions\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "KSOSearchBar",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "KSOSearchBar.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Kosoku\/Ditko.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95DFEE02B27284838A8FA3A07714FEA27B4CE167"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Kosoku\/Stanley.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C94B06A26B26F3DFAC67E018206B5755A8E083DD"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Kosoku\/KSOFontAwesomeExtensions.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F498E775B877B20503564CBDCDC72C5B66674364"
+    }
+  ]
+}
