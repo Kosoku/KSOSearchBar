@@ -20,11 +20,13 @@
 #import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
 
 static CGFloat const kSubviewMargin = 8.0;
+static CGSize const kIconSize = {.width=16.0, .height=16.0};
 
 @interface KSOSearchBarView () <UITextFieldDelegate>
 @property (strong,nonatomic) UILabel *promptLabel;
 @property (strong,nonatomic) KDITextField *textField;
 @property (strong,nonatomic) UIImageView *searchImageView;
+@property (strong,nonatomic) UIButton *clearButton;
 @property (strong,nonatomic) UISegmentedControl *segmentedControl;
 
 - (void)_KSOSearchBarViewInit;
@@ -175,7 +177,7 @@ static CGFloat const kSubviewMargin = 8.0;
     
     _promptLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     
-    _searchImageView = [[UIImageView alloc] initWithImage:[UIImage KSO_fontAwesomeImageWithIcon:KSOFontAwesomeIconSearch foregroundColor:UIColor.lightGrayColor size:CGSizeMake(16, 16)]];
+    _searchImageView = [[UIImageView alloc] initWithImage:[UIImage KSO_fontAwesomeImageWithIcon:KSOFontAwesomeIconSearch foregroundColor:UIColor.grayColor size:kIconSize]];
     [self addSubview:_searchImageView];
     
     _textField = [[KDITextField alloc] initWithFrame:CGRectZero];
@@ -185,6 +187,13 @@ static CGFloat const kSubviewMargin = 8.0;
     [_textField setDelegate:self];
     [_textField setTextEdgeInsets:UIEdgeInsetsMake(0, kSubviewMargin + CGRectGetWidth(_searchImageView.frame) + kSubviewMargin, 0, kSubviewMargin)];
     [self insertSubview:_textField belowSubview:_searchImageView];
+    
+    _clearButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [_clearButton setImage:[UIImage KSO_fontAwesomeImageWithString:@"\uf057" foregroundColor:UIColor.grayColor size:kIconSize] forState:UIControlStateNormal];
+    [_clearButton sizeToFit];
+    [_textField setRightView:_clearButton];
+    [_textField setRightViewMode:UITextFieldViewModeAlways];
+    [_textField setRightViewEdgeInsets:UIEdgeInsetsMake(0, kSubviewMargin, 0, kSubviewMargin)];
     
     _segmentedControl = [[UISegmentedControl alloc] initWithFrame:CGRectZero];
     
