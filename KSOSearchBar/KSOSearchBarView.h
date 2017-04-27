@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface KSOSearchBarView : UIView
 
 @property (copy,nonatomic,nullable) NSString *prompt;
+@property (copy,nonatomic,nullable) NSString *text;
 @property (strong,nonatomic,null_resettable) UIColor *promptTextColor UI_APPEARANCE_SELECTOR;
 @property (assign,nonatomic) BOOL showsScopeBar;
 @property (copy,nonatomic) NSArray *scopeBarItems;

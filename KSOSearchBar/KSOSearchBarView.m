@@ -32,6 +32,7 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
 - (void)_KSOSearchBarViewInit;
 - (CGSize)_sizeThatFits:(CGSize)size layout:(BOOL)layout;
 - (void)_updatePromptLabel;
+- (void)_updateClearButton;
 + (UIColor *)_defaultPromptTextColor;
 @end
 
@@ -108,6 +109,7 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
         [self layoutIfNeeded];
     } completion:nil];
 }
+
 #pragma mark *** Public Methods ***
 #pragma mark Properties
 - (void)setPrompt:(NSString *)prompt {
@@ -127,6 +129,15 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
         [self setNeedsLayout];
         [self invalidateIntrinsicContentSize];
     }
+}
+@dynamic text;
+- (NSString *)text {
+    return self.textField.text;
+}
+- (void)setText:(NSString *)text {
+    [self.textField setText:text];
+    
+    [self _updateClearButton];
 }
 - (void)setPromptTextColor:(UIColor *)promptTextColor {
     _promptTextColor = promptTextColor ?: [self.class _defaultPromptTextColor];
@@ -182,20 +193,32 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     
     _textField = [[KDITextField alloc] initWithFrame:CGRectZero];
     [_textField setAdjustsFontForContentSizeCategory:YES];
+    [_textField setReturnKeyType:UIReturnKeySearch];
     [_textField setBorderStyle:UITextBorderStyleRoundedRect];
     [_textField setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
     [_textField setDelegate:self];
     [_textField setTextEdgeInsets:UIEdgeInsetsMake(0, kSubviewMargin + CGRectGetWidth(_searchImageView.frame) + kSubviewMargin, 0, kSubviewMargin)];
+    kstWeakify(self);
+    [_textField KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        kstStrongify(self);
+        [self _updateClearButton];
+    } forControlEvents:UIControlEventEditingChanged];
     [self insertSubview:_textField belowSubview:_searchImageView];
     
     _clearButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_clearButton setImage:[UIImage KSO_fontAwesomeImageWithString:@"\uf057" foregroundColor:UIColor.grayColor size:kIconSize] forState:UIControlStateNormal];
+    [_clearButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        kstStrongify(self);
+        [self setText:nil];
+    } forControlEvents:UIControlEventTouchUpInside];
     [_clearButton sizeToFit];
     [_textField setRightView:_clearButton];
     [_textField setRightViewMode:UITextFieldViewModeAlways];
     [_textField setRightViewEdgeInsets:UIEdgeInsetsMake(0, kSubviewMargin, 0, kSubviewMargin)];
     
     _segmentedControl = [[UISegmentedControl alloc] initWithFrame:CGRectZero];
+    
+    [self _updateClearButton];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_contentSizeCategoryDidChange:) name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
@@ -246,6 +269,9 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     if (self.prompt.length > 0) {
         [self.promptLabel setAttributedText:[[NSAttributedString alloc] initWithString:self.prompt attributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote], NSForegroundColorAttributeName: self.promptTextColor, NSTextEffectAttributeName: NSTextEffectLetterpressStyle, NSParagraphStyleAttributeName: [NSParagraphStyle KDI_paragraphStyleWithCenterTextAlignment]}]];
     }
+}
+- (void)_updateClearButton; {
+    [self.clearButton setAlpha:self.text.length > 0 ? 1.0 : 0.0];
 }
 
 + (UIColor *)_defaultPromptTextColor; {
