@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		073EEB111EB28C2E00808888 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 073EEB101EB28C2E00808888 /* FontAwesome.ttf */; };
 		07E577FA1EB2595C007687E8 /* KSOSearchBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 07E577F81EB2595C007687E8 /* KSOSearchBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07E578051EB25AD7007687E8 /* KSOSearchBarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 07E578031EB25AD7007687E8 /* KSOSearchBarView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07E578061EB25AD7007687E8 /* KSOSearchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E578041EB25AD7007687E8 /* KSOSearchBarView.m */; };
@@ -57,6 +58,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		073EEB101EB28C2E00808888 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		07E577F51EB2595C007687E8 /* KSOSearchBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOSearchBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07E577F81EB2595C007687E8 /* KSOSearchBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOSearchBar.h; sourceTree = "<group>"; };
 		07E577F91EB2595C007687E8 /* KSOSearchBar-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KSOSearchBar-iOS-Info.plist"; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 		07E5780D1EB25B95007687E8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				073EEB101EB28C2E00808888 /* FontAwesome.ttf */,
 				07E5780E1EB25B95007687E8 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -296,6 +299,7 @@
 				07E5781D1EB25B95007687E8 /* LaunchScreen.storyboard in Resources */,
 				07E5781A1EB25B95007687E8 /* Assets.xcassets in Resources */,
 				07E578181EB25B95007687E8 /* Main.storyboard in Resources */,
+				073EEB111EB28C2E00808888 /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

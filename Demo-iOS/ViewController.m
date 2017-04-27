@@ -39,5 +39,10 @@
     [self.searchBar setShowsScopeBar:YES];
     [self.searchBar setScopeButtonTitles:scopeBarItems];
 }
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.searchBarView becomeFirstResponder];
+}
 
 @end

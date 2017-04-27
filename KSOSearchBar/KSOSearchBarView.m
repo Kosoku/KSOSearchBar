@@ -21,9 +21,10 @@
 
 static CGFloat const kSubviewMargin = 8.0;
 
-@interface KSOSearchBarView ()
+@interface KSOSearchBarView () <UITextFieldDelegate>
 @property (strong,nonatomic) UILabel *promptLabel;
 @property (strong,nonatomic) KDITextField *textField;
+@property (strong,nonatomic) UIImageView *searchImageView;
 @property (strong,nonatomic) UISegmentedControl *segmentedControl;
 
 - (void)_KSOSearchBarViewInit;
@@ -33,7 +34,7 @@ static CGFloat const kSubviewMargin = 8.0;
 @end
 
 @implementation KSOSearchBarView
-
+#pragma mark *** Subclass Overrides ***
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -55,6 +56,34 @@ static CGFloat const kSubviewMargin = 8.0;
     return self;
 }
 
+- (BOOL)canBecomeFirstResponder {
+    return self.textField.canBecomeFirstResponder;
+}
+- (BOOL)isFirstResponder {
+    return self.textField.isFirstResponder;
+}
+- (BOOL)becomeFirstResponder {
+    BOOL retval = [self.textField becomeFirstResponder];
+    
+    if (retval) {
+        
+    }
+    
+    return retval;
+}
+- (BOOL)resignFirstResponder {
+    BOOL retval = [self.textField resignFirstResponder];
+    
+    if (retval) {
+        [self setNeedsLayout];
+        [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:1.0 initialSpringVelocity:0.1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [self layoutIfNeeded];
+        } completion:nil];
+    }
+    
+    return retval;
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     
@@ -67,7 +96,21 @@ static CGFloat const kSubviewMargin = 8.0;
 - (CGSize)sizeThatFits:(CGSize)size {
     return [self _sizeThatFits:size layout:NO];
 }
-
+#pragma mark UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self setNeedsLayout];
+    [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:1.0 initialSpringVelocity:0.1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [self layoutIfNeeded];
+    } completion:nil];
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
+    [self setNeedsLayout];
+    [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:1.0 initialSpringVelocity:0.1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [self layoutIfNeeded];
+    } completion:nil];
+}
+#pragma mark *** Public Methods ***
+#pragma mark Properties
 - (void)setPrompt:(NSString *)prompt {
     BOOL promptWasVisible = self.prompt.length > 0;
     
@@ -127,7 +170,7 @@ static CGFloat const kSubviewMargin = 8.0;
     
     [self.segmentedControl setSelectedSegmentIndex:0];
 }
-
+#pragma mark *** Private Methods ***
 - (void)_KSOSearchBarViewInit; {
     [self setBackgroundColor:KDIColorHexadecimal(@"c9c9ce")];
     
@@ -135,12 +178,16 @@ static CGFloat const kSubviewMargin = 8.0;
     
     _promptLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     
+    _searchImageView = [[UIImageView alloc] initWithImage:[UIImage KSO_fontAwesomeImageWithIcon:KSOFontAwesomeIconSearch foregroundColor:UIColor.lightGrayColor size:CGSizeMake(16, 16)]];
+    [self addSubview:_searchImageView];
+    
     _textField = [[KDITextField alloc] initWithFrame:CGRectZero];
     [_textField setAdjustsFontForContentSizeCategory:YES];
     [_textField setBorderStyle:UITextBorderStyleRoundedRect];
     [_textField setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-    [_textField setTextEdgeInsets:UIEdgeInsetsMake(0, kSubviewMargin, 0, kSubviewMargin)];
-    [self addSubview:_textField];
+    [_textField setDelegate:self];
+    [_textField setTextEdgeInsets:UIEdgeInsetsMake(0, kSubviewMargin + CGRectGetWidth(_searchImageView.frame) + kSubviewMargin, 0, kSubviewMargin)];
+    [self insertSubview:_textField belowSubview:_searchImageView];
     
     _segmentedControl = [[UISegmentedControl alloc] initWithFrame:CGRectZero];
     
@@ -175,6 +222,13 @@ static CGFloat const kSubviewMargin = 8.0;
             [self.textField setFrame:CGRectMake(kSubviewMargin, kSubviewMargin, CGRectGetWidth(self.bounds) - kSubviewMargin - kSubviewMargin, [self.textField sizeThatFits:CGSizeZero].height)];
         }
         
+        if (self.isFirstResponder) {
+            [self.searchImageView setFrame:KSTCGRectCenterInRectVertically(CGRectMake(CGRectGetMinX(self.textField.frame) + kSubviewMargin, 0, CGRectGetWidth(self.searchImageView.frame), CGRectGetHeight(self.searchImageView.frame)), self.textField.frame)];
+        }
+        else {
+            [self.searchImageView setFrame:KSTCGRectCenterInRect(self.searchImageView.frame, self.textField.frame)];
+        }
+        
         if (self.showsScopeBar) {
             [self.segmentedControl setFrame:CGRectMake(kSubviewMargin, CGRectGetMaxY(self.textField.frame) + kSubviewMargin, CGRectGetWidth(self.bounds) - kSubviewMargin - kSubviewMargin, [self.segmentedControl sizeThatFits:CGSizeZero].height)];
         }
@@ -191,7 +245,7 @@ static CGFloat const kSubviewMargin = 8.0;
 + (UIColor *)_defaultPromptTextColor; {
     return UIColor.darkGrayColor;
 }
-
+#pragma mark Notifications
 - (void)_contentSizeCategoryDidChange:(NSNotification *)note {
     [self _updatePromptLabel];
     
