@@ -22,7 +22,9 @@
 
 static NSString *const kCloseButtonString = @"\uf057";
 static CGFloat const kSubviewMargin = 8.0;
+#if (TARGET_OS_IOS)
 static CGSize const kIconSize = {.width=16.0, .height=16.0};
+#endif
 
 @interface KSOSearchBarView () <UITextFieldDelegate>
 @property (strong,nonatomic) UILabel *promptLabel;
