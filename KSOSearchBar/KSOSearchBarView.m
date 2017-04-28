@@ -66,6 +66,14 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     return self;
 }
 
+- (id)forwardingTargetForSelector:(SEL)aSelector {
+    // to handle the UITextInputTraits methods
+    if ([self.textField respondsToSelector:aSelector]) {
+        return self.textField;
+    }
+    return nil;
+}
+
 - (BOOL)canBecomeFirstResponder {
     return self.textField.canBecomeFirstResponder;
 }
@@ -115,6 +123,7 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
         [self.delegate searchBarViewDidBeginEditing:self];
     }
     
+    [self layoutIfNeeded];
     [self setNeedsLayout];
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:1.0 initialSpringVelocity:0.1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         [self layoutIfNeeded];
@@ -133,6 +142,7 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
         [self.delegate searchBarViewDidEndEditing:self];
     }
     
+    [self layoutIfNeeded];
     [self setNeedsLayout];
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:1.0 initialSpringVelocity:0.1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         [self layoutIfNeeded];
@@ -290,9 +300,14 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     [_textField setAdjustsFontForContentSizeCategory:YES];
     [_textField setReturnKeyType:UIReturnKeySearch];
     [_textField setBorderStyle:UITextBorderStyleRoundedRect];
-    [_textField setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+    [_textField setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
     [_textField setTextColor:_textColor];
     [_textField setDelegate:self];
+    [_textField setAutocorrectionType:UITextAutocorrectionTypeNo];
+    [_textField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+    [_textField setEnablesReturnKeyAutomatically:YES];
+    [_textField setReturnKeyType:UIReturnKeySearch];
+    [_textField setSpellCheckingType:UITextSpellCheckingTypeNo];
     [_textField setTextEdgeInsets:UIEdgeInsetsMake(0, kSubviewMargin + CGRectGetWidth(_searchImageView.frame) + kSubviewMargin, 0, kSubviewMargin)];
     kstWeakify(self);
     [_textField KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
@@ -307,7 +322,7 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     [self insertSubview:_textField belowSubview:_searchImageView];
     
     _placeholderLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [_placeholderLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+    [_placeholderLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
     [_placeholderLabel setTextColor:_placeholderTextColor];
     
     _clearButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -394,7 +409,9 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
         
         frameY = CGRectGetMaxY(self.textField.frame) + kSubviewMargin;
         
-        if (self.isFirstResponder) {
+        if (self.isFirstResponder ||
+            self.text.length > 0) {
+            
             [self.searchImageView setFrame:KSTCGRectCenterInRectVertically(CGRectMake(CGRectGetMinX(self.textField.frame) + kSubviewMargin, 0, CGRectGetWidth(self.searchImageView.frame), CGRectGetHeight(self.searchImageView.frame)), self.textField.frame)];
             
             if (self.placeholder.length > 0) {
@@ -436,7 +453,7 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
 }
 
 + (UIColor *)_defaultPromptTextColor; {
-    return UIColor.grayColor;
+    return UIColor.darkGrayColor;
 }
 + (UIColor *)_defaultTextColor; {
     return UIColor.blackColor;

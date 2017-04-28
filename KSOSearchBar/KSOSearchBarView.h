@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  `KSOSearchBarView` is an alternative implementation of `UISearchBar`.
  */
-@interface KSOSearchBarView : UIView
+@interface KSOSearchBarView : UIView <UITextInputTraits>
 
 /**
  Set and get the delegate of the receiver.

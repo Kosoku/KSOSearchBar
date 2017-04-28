@@ -29,6 +29,7 @@
     [super viewDidLoad];
     
     [self.searchBarView setDelegate:self];
+    [self.searchBarView setKeyboardAppearance:UIKeyboardAppearanceDark];
     [self.searchBar setDelegate:self];
 }
 - (void)viewDidAppear:(BOOL)animated {
@@ -87,12 +88,12 @@
     [self.searchBar setShowsScopeBar:sender.isOn];
 }
 - (IBAction)_promptAction:(UITextField *)sender {
-    [self.searchBarView setPrompt:sender.text];
-    [self.searchBar setPrompt:sender.text];
+    [self.searchBarView setPrompt:[NSString stringWithFormat:@"%@: %@",NSStringFromClass(self.searchBarView.class),sender.text]];
+    [self.searchBar setPrompt:[NSString stringWithFormat:@"%@: %@",NSStringFromClass(self.searchBar.class),sender.text]];
 }
 - (IBAction)_placeholderAction:(UITextField *)sender {
-    [self.searchBarView setPlaceholder:sender.text];
-    [self.searchBar setPlaceholder:sender.text];
+    [self.searchBarView setPlaceholder:[NSString stringWithFormat:@"%@: %@",NSStringFromClass(self.searchBarView.class),sender.text]];
+    [self.searchBar setPlaceholder:[NSString stringWithFormat:@"%@: %@",NSStringFromClass(self.searchBar.class),sender.text]];
 }
 
 @end
