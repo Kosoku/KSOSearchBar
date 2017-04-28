@@ -38,6 +38,8 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
 - (void)_updatePlaceholderLabel;
 - (void)_updateClearButton;
 + (UIColor *)_defaultPromptTextColor;
++ (UIColor *)_defaultTextColor;
++ (UIColor *)_defaultPlaceholderTextColor;
 @end
 
 @implementation KSOSearchBarView
@@ -178,6 +180,11 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     [self _updatePlaceholderLabel];
     [self _updateClearButton];
 }
+- (void)setTextColor:(UIColor *)textColor {
+    _textColor = textColor ?: [self.class _defaultTextColor];
+    
+    [self.textField setTextColor:_textColor];
+}
 @dynamic placeholder;
 - (NSString *)placeholder {
     return self.placeholderLabel.text;
@@ -195,6 +202,11 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
         [self.placeholderLabel removeFromSuperview];
         [self setNeedsLayout];
     }
+}
+- (void)setPlaceholderTextColor:(UIColor *)placeholderTextColor {
+    _placeholderTextColor = placeholderTextColor ?: [self.class _defaultPlaceholderTextColor];
+    
+    [self.placeholderLabel setTextColor:_placeholderTextColor];
 }
 - (void)setShowsScopeBar:(BOOL)showsScopeBar {
     if (_showsScopeBar == showsScopeBar) {
@@ -258,6 +270,7 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     [self setBackgroundColor:KDIColorHexadecimal(@"c9c9ce")];
     
     _promptTextColor = [self.class _defaultPromptTextColor];
+    _textColor = [self.class _defaultTextColor];
     
     _promptLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     
@@ -269,6 +282,7 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     [_textField setReturnKeyType:UIReturnKeySearch];
     [_textField setBorderStyle:UITextBorderStyleRoundedRect];
     [_textField setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+    [_textField setTextColor:_textColor];
     [_textField setDelegate:self];
     [_textField setTextEdgeInsets:UIEdgeInsetsMake(0, kSubviewMargin + CGRectGetWidth(_searchImageView.frame) + kSubviewMargin, 0, kSubviewMargin)];
     kstWeakify(self);
@@ -285,7 +299,7 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     
     _placeholderLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [_placeholderLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-    [_placeholderLabel setTextColor:UIColor.grayColor];
+    [_placeholderLabel setTextColor:_placeholderTextColor];
     
     _clearButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_clearButton setImage:[UIImage KSO_fontAwesomeImageWithString:@"\uf057" foregroundColor:UIColor.grayColor size:kIconSize] forState:UIControlStateNormal];
@@ -405,7 +419,13 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
 }
 
 + (UIColor *)_defaultPromptTextColor; {
-    return UIColor.darkGrayColor;
+    return UIColor.grayColor;
+}
++ (UIColor *)_defaultTextColor; {
+    return UIColor.blackColor;
+}
++ (UIColor *)_defaultPlaceholderTextColor; {
+    return UIColor.grayColor;
 }
 #pragma mark Notifications
 - (void)_contentSizeCategoryDidChange:(NSNotification *)note {

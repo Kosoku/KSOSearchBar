@@ -26,7 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy,nonatomic,nullable) NSString *prompt;
 @property (strong,nonatomic,null_resettable) UIColor *promptTextColor UI_APPEARANCE_SELECTOR;
 @property (copy,nonatomic,nullable) NSString *text;
+@property (strong,nonatomic,null_resettable) UIColor *textColor UI_APPEARANCE_SELECTOR;
 @property (copy,nonatomic,nullable) NSString *placeholder;
+@property (strong,nonatomic,null_resettable) UIColor *placeholderTextColor UI_APPEARANCE_SELECTOR;
 @property (assign,nonatomic) BOOL showsScopeBar;
 @property (copy,nonatomic) NSArray *scopeBarItems;
 @property (assign,nonatomic) BOOL showsCancelButton;
