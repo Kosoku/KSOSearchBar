@@ -33,6 +33,8 @@ KSOSearchBar is an alternative implementation of UISearchBar. The goal being to 
   s.requires_arc = true
 
   s.source_files = 'KSOSearchBar/**/*.{h,m}'
+  s.exclude_files = 'KSOSearchBar/KSOSearchBar-Info.h'
+  s.private_header_files = 'KSOSearchBar/Private/*.h'
   
   s.resource_bundles = {
     'KSOSearchBar' => ['KSOSearchBar/**/*.{xcassets,lproj}']
