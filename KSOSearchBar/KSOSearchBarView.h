@@ -80,7 +80,12 @@ NS_ASSUME_NONNULL_BEGIN
  
  The default is NO.
  */
-@property (assign,nonatomic) BOOL showsCancelButton;
+@property (assign,nonatomic) BOOL showsCancelButton __TVOS_PROHIBITED;
+
+/**
+ Set the inputAccessoryView on the UITextField managed by the receiver.
+ */
+- (void)setInputAccessoryView:(__kindof UIView * _Nullable)inputAccessoryView;
 
 @end
 
