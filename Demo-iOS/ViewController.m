@@ -16,8 +16,9 @@
 #import "ViewController.h"
 
 #import <KSOSearchBar/KSOSearchBar.h>
+#import <Stanley/Stanley.h>
 
-@interface ViewController ()
+@interface ViewController () <KSOSearchBarViewDelegate,UISearchBarDelegate>
 @property (weak,nonatomic) IBOutlet KSOSearchBarView *searchBarView;
 @property (weak,nonatomic) IBOutlet UISearchBar *searchBar;
 @end
@@ -27,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.searchBarView setDelegate:self];
+    [self.searchBar setDelegate:self];
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -34,6 +37,45 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.searchBarView becomeFirstResponder];
     });
+}
+
+- (BOOL)searchBarViewShouldBeginEditing:(KSOSearchBarView *)searchBarView; {
+    KSTLogObject(searchBarView);
+    return YES;
+}
+- (void)searchBarViewDidBeginEditing:(KSOSearchBarView *)searchBarView {
+    KSTLogObject(searchBarView);
+}
+- (BOOL)searchBarViewShouldEndEditing:(KSOSearchBarView *)searchBarView {
+    KSTLogObject(searchBarView);
+    return YES;
+}
+- (void)searchBarViewDidEndEditing:(KSOSearchBarView *)searchBarView {
+    KSTLogObject(searchBarView);
+}
+- (BOOL)searchBarView:(KSOSearchBarView *)searchBarView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    KSTLog(@"searchBarView=%@ range=%@ text=%@",searchBarView,NSStringFromRange(range),text);
+    return YES;
+}
+- (void)searchBarView:(KSOSearchBarView *)searchBarView didChangeText:(NSString *)text {
+    KSTLog(@"searchBarView=%@ text=%@",searchBarView,text);
+}
+- (void)searchBarViewDidTapCancelButton:(KSOSearchBarView *)searchBarView {
+    KSTLogObject(searchBarView);
+}
+- (void)searchBarViewDidTapClearButton:(KSOSearchBarView *)searchBarView {
+    KSTLogObject(searchBarView);
+}
+- (void)searchBarView:(KSOSearchBarView *)searchBarView didChangeSelectedScopeBarIndex:(NSInteger)index {
+    KSTLog(@"searchBarView=%@ index=%@",searchBarView,@(index));
+}
+
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    KSTLog(@"searchBar=%@ range=%@ text=%@",searchBar,NSStringFromRange(range),text);
+    return YES;
+}
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    KSTLog(@"searchBar=%@ text=%@",searchBar,searchText);
 }
 
 - (IBAction)_showsCancelButton:(UISwitch *)sender {

@@ -20,6 +20,7 @@
 #import <Stanley/Stanley.h>
 #import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
 
+static NSString *const kCloseButtonString = @"\uf057";
 static CGFloat const kSubviewMargin = 8.0;
 static CGSize const kIconSize = {.width=16.0, .height=16.0};
 
@@ -230,6 +231,13 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
         [self invalidateIntrinsicContentSize];
     }
 }
+@dynamic selectedScopeBarIndex;
+- (NSInteger)selectedScopeBarIndex {
+    return self.segmentedControl.selectedSegmentIndex;
+}
+- (void)setSelectedScopeBarIndex:(NSInteger)selectedScopeBarIndex {
+    [self.segmentedControl setSelectedSegmentIndex:selectedScopeBarIndex];
+}
 - (void)setScopeBarItems:(NSArray *)scopeBarItems {
     _scopeBarItems = [scopeBarItems copy];
     
@@ -271,10 +279,11 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     
     _promptTextColor = [self.class _defaultPromptTextColor];
     _textColor = [self.class _defaultTextColor];
+    _placeholderTextColor = [self.class _defaultPlaceholderTextColor];
     
     _promptLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     
-    _searchImageView = [[UIImageView alloc] initWithImage:[UIImage KSO_fontAwesomeImageWithIcon:KSOFontAwesomeIconSearch foregroundColor:UIColor.grayColor size:kIconSize]];
+    _searchImageView = [[UIImageView alloc] initWithImage:[UIImage KSO_fontAwesomeImageWithIcon:KSOFontAwesomeIconSearch foregroundColor:_placeholderTextColor size:kIconSize]];
     [self addSubview:_searchImageView];
     
     _textField = [[KDITextField alloc] initWithFrame:CGRectZero];
@@ -302,12 +311,21 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     [_placeholderLabel setTextColor:_placeholderTextColor];
     
     _clearButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_clearButton setImage:[UIImage KSO_fontAwesomeImageWithString:@"\uf057" foregroundColor:UIColor.grayColor size:kIconSize] forState:UIControlStateNormal];
+    [_clearButton setImage:[UIImage KSO_fontAwesomeImageWithString:kCloseButtonString foregroundColor:_placeholderTextColor size:kIconSize] forState:UIControlStateNormal];
     [_clearButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
-        [self setText:nil];
         if ([self.delegate respondsToSelector:@selector(searchBarViewDidTapClearButton:)]) {
             [self.delegate searchBarViewDidTapClearButton:self];
+        }
+        BOOL shouldChangeText = YES;
+        if ([self.delegate respondsToSelector:@selector(searchBarView:shouldChangeTextInRange:replacementText:)]) {
+            shouldChangeText = [self.delegate searchBarView:self shouldChangeTextInRange:NSMakeRange(0, self.text.length) replacementText:nil];
+        }
+        if (shouldChangeText) {
+            [self setText:nil];
+            if ([self.delegate respondsToSelector:@selector(searchBarView:didChangeText:)]) {
+                [self.delegate searchBarView:self didChangeText:self.text];
+            }
         }
     } forControlEvents:UIControlEventTouchUpInside];
     [_clearButton sizeToFit];
@@ -325,7 +343,6 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
         if ([self.delegate respondsToSelector:@selector(searchBarViewDidTapCancelButton:)]) {
             [self.delegate searchBarViewDidTapCancelButton:self];
         }
-        
         [self resignFirstResponder];
     } forControlEvents:UIControlEventTouchUpInside];
     
