@@ -101,7 +101,17 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     return [self _sizeThatFits:size layout:NO];
 }
 #pragma mark UITextFieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if ([self.delegate respondsToSelector:@selector(searchBarViewShouldBeginEditing:)]) {
+        return [self.delegate searchBarViewShouldBeginEditing:self];
+    }
+    return YES;
+}
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if ([self.delegate respondsToSelector:@selector(searchBarViewDidBeginEditing:)]) {
+        [self.delegate searchBarViewDidBeginEditing:self];
+    }
+    
     [self setNeedsLayout];
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:1.0 initialSpringVelocity:0.1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         [self layoutIfNeeded];
@@ -109,7 +119,17 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
         [self.cancelButton setEnabled:YES];
     } completion:nil];
 }
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    if ([self.delegate respondsToSelector:@selector(searchBarViewShouldEndEditing:)]) {
+        return [self.delegate searchBarViewShouldEndEditing:self];
+    }
+    return YES;
+}
 - (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
+    if ([self.delegate respondsToSelector:@selector(searchBarViewDidEndEditing:)]) {
+        [self.delegate searchBarViewDidEndEditing:self];
+    }
+    
     [self setNeedsLayout];
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:1.0 initialSpringVelocity:0.1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         [self layoutIfNeeded];
@@ -117,7 +137,12 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
         [self.cancelButton setEnabled:NO];
     } completion:nil];
 }
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if ([self.delegate respondsToSelector:@selector(searchBarView:shouldChangeTextInRange:replacementText:)]) {
+        return [self.delegate searchBarView:self shouldChangeTextInRange:range replacementText:string];
+    }
+    return YES;
+}
 #pragma mark *** Public Methods ***
 #pragma mark Properties
 - (void)setPrompt:(NSString *)prompt {
@@ -252,8 +277,8 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
         [self _updatePlaceholderLabel];
         [self _updateClearButton];
         
-        if ([self.delegate respondsToSelector:@selector(searchBarView:textDidChange:)]) {
-            [self.delegate searchBarView:self textDidChange:self.text];
+        if ([self.delegate respondsToSelector:@selector(searchBarView:didChangeText:)]) {
+            [self.delegate searchBarView:self didChangeText:self.text];
         }
     } forControlEvents:UIControlEventEditingChanged];
     [self insertSubview:_textField belowSubview:_searchImageView];
@@ -267,6 +292,9 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     [_clearButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
         [self setText:nil];
+        if ([self.delegate respondsToSelector:@selector(searchBarViewDidTapClearButton:)]) {
+            [self.delegate searchBarViewDidTapClearButton:self];
+        }
     } forControlEvents:UIControlEventTouchUpInside];
     [_clearButton sizeToFit];
     [_textField setRightView:_clearButton];
@@ -280,10 +308,20 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     [_cancelButton setTitle:NSLocalizedStringWithDefaultValue(@"CANCEL_BUTTON_TITLE", nil, [NSBundle KSO_searchBarFrameworkBundle], @"Cancel", @"cancel button title") forState:UIControlStateNormal];
     [_cancelButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
+        if ([self.delegate respondsToSelector:@selector(searchBarViewDidTapCancelButton:)]) {
+            [self.delegate searchBarViewDidTapCancelButton:self];
+        }
+        
         [self resignFirstResponder];
     } forControlEvents:UIControlEventTouchUpInside];
     
     _segmentedControl = [[UISegmentedControl alloc] initWithFrame:CGRectZero];
+    [_segmentedControl KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        kstStrongify(self);
+        if ([self.delegate respondsToSelector:@selector(searchBarView:didChangeSelectedScopeBarIndex:)]) {
+            [self.delegate searchBarView:self didChangeSelectedScopeBarIndex:self.segmentedControl.selectedSegmentIndex];
+        }
+    } forControlEvents:UIControlEventValueChanged];
     
     [self _updateClearButton];
     

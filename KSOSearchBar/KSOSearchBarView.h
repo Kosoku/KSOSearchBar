@@ -35,7 +35,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol KSOSearchBarViewDelegate <NSObject>
 @optional
-- (void)searchBarView:(KSOSearchBarView *)searchBarView textDidChange:(nullable NSString *)text;
+- (BOOL)searchBarViewShouldBeginEditing:(KSOSearchBarView *)searchBarView;
+- (void)searchBarViewDidBeginEditing:(KSOSearchBarView *)searchBarView;
+- (BOOL)searchBarViewShouldEndEditing:(KSOSearchBarView *)searchBarView;
+- (void)searchBarViewDidEndEditing:(KSOSearchBarView *)searchBarView;
+- (BOOL)searchBarView:(KSOSearchBarView *)searchBarView shouldChangeTextInRange:(NSRange)range replacementText:(nullable NSString *)text;
+- (void)searchBarView:(KSOSearchBarView *)searchBarView didChangeText:(nullable NSString *)text;
+
+- (void)searchBarViewDidTapCancelButton:(KSOSearchBarView *)searchBarView;
+- (void)searchBarViewDidTapClearButton:(KSOSearchBarView *)searchBarView;
+
+- (void)searchBarView:(KSOSearchBarView *)searchBarView didChangeSelectedScopeBarIndex:(NSInteger)index;
 @end
 
 NS_ASSUME_NONNULL_END
