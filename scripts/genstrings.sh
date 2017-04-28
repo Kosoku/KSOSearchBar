@@ -1,0 +1,1 @@
+genstrings -o $SRCROOT/KSOSearchBar/en.lproj $SRCROOT/KSOSearchBar/*.m

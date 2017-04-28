@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,15 +34,73 @@
                                     <string>Title</string>
                                 </scopeButtonTitles>
                             </searchBar>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZCo-Ct-yzK">
+                                <rect key="frame" x="16" y="134" width="51" height="31"/>
+                                <connections>
+                                    <action selector="_showsCancelButton:" destination="BYZ-38-t0r" eventType="valueChanged" id="sfc-nN-ZQE"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shows cancel button" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H38-c3-02T">
+                                <rect key="frame" x="73" y="139" width="160" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shows scope bar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFv-ac-3nT">
+                                <rect key="frame" x="73" y="178" width="132" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YA0-Ro-FFl">
+                                <rect key="frame" x="16" y="173" width="51" height="31"/>
+                                <connections>
+                                    <action selector="_showsScopeBar:" destination="BYZ-38-t0r" eventType="valueChanged" id="fjK-Qc-p5x"/>
+                                </connections>
+                            </switch>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Prompt" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p4k-mo-dh2">
+                                <rect key="frame" x="16" y="212" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="_promptAction:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="T4j-ye-8bf"/>
+                                    <action selector="_promptAction:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="VtO-eG-x65"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Placeholder" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P3D-mg-cCl">
+                                <rect key="frame" x="16" y="250" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="_placeholderAction:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="N5h-Kb-hcD"/>
+                                    <action selector="_placeholderAction:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="eRN-N5-Iwi"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="I0v-l7-Bgn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="8pe-rc-8Hi"/>
                             <constraint firstAttribute="trailing" secondItem="0Yi-8H-QMn" secondAttribute="trailing" id="DHn-z7-hHw"/>
                             <constraint firstItem="0Yi-8H-QMn" firstAttribute="top" secondItem="I0v-l7-Bgn" secondAttribute="bottom" constant="8" id="DWH-mu-tbY"/>
+                            <constraint firstItem="ZCo-Ct-yzK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="G5Q-mt-DFd"/>
+                            <constraint firstItem="P3D-mg-cCl" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="IB2-dD-ue5"/>
+                            <constraint firstItem="H38-c3-02T" firstAttribute="leading" secondItem="ZCo-Ct-yzK" secondAttribute="trailing" constant="8" id="JJh-K5-z13"/>
+                            <constraint firstItem="P3D-mg-cCl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="LPE-Rb-R1F"/>
                             <constraint firstItem="0Yi-8H-QMn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Myb-iQ-JLI"/>
+                            <constraint firstItem="YA0-Ro-FFl" firstAttribute="top" secondItem="ZCo-Ct-yzK" secondAttribute="bottom" constant="8" id="NSf-40-OEl"/>
+                            <constraint firstItem="eFv-ac-3nT" firstAttribute="leading" secondItem="YA0-Ro-FFl" secondAttribute="trailing" constant="8" id="NcV-FB-nnj"/>
                             <constraint firstItem="I0v-l7-Bgn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="P9k-M8-71X"/>
+                            <constraint firstItem="P3D-mg-cCl" firstAttribute="top" secondItem="p4k-mo-dh2" secondAttribute="bottom" constant="8" id="RqC-w2-IVs"/>
+                            <constraint firstItem="p4k-mo-dh2" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="UGg-6e-MSl"/>
+                            <constraint firstItem="YA0-Ro-FFl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="c4n-uW-6Tk"/>
+                            <constraint firstItem="eFv-ac-3nT" firstAttribute="centerY" secondItem="YA0-Ro-FFl" secondAttribute="centerY" id="csS-n3-hbg"/>
+                            <constraint firstItem="p4k-mo-dh2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="d1N-p2-Eng"/>
+                            <constraint firstItem="H38-c3-02T" firstAttribute="centerY" secondItem="ZCo-Ct-yzK" secondAttribute="centerY" id="g11-qf-u6q"/>
                             <constraint firstAttribute="trailing" secondItem="I0v-l7-Bgn" secondAttribute="trailing" id="rcD-FQ-wz5"/>
+                            <constraint firstItem="p4k-mo-dh2" firstAttribute="top" secondItem="YA0-Ro-FFl" secondAttribute="bottom" constant="8" id="uyB-C7-LI9"/>
+                            <constraint firstItem="ZCo-Ct-yzK" firstAttribute="top" secondItem="0Yi-8H-QMn" secondAttribute="bottom" constant="8" id="zR3-tE-Gca"/>
                         </constraints>
                     </view>
                     <connections>

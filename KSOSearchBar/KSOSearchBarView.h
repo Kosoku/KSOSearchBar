@@ -17,14 +17,25 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol KSOSearchBarViewDelegate;
+
 @interface KSOSearchBarView : UIView
 
+@property (weak,nonatomic,nullable) id<KSOSearchBarViewDelegate> delegate;
+
 @property (copy,nonatomic,nullable) NSString *prompt;
-@property (copy,nonatomic,nullable) NSString *text;
 @property (strong,nonatomic,null_resettable) UIColor *promptTextColor UI_APPEARANCE_SELECTOR;
+@property (copy,nonatomic,nullable) NSString *text;
+@property (copy,nonatomic,nullable) NSString *placeholder;
 @property (assign,nonatomic) BOOL showsScopeBar;
 @property (copy,nonatomic) NSArray *scopeBarItems;
+@property (assign,nonatomic) BOOL showsCancelButton;
 
+@end
+
+@protocol KSOSearchBarViewDelegate <NSObject>
+@optional
+- (void)searchBarView:(KSOSearchBarView *)searchBarView textDidChange:(nullable NSString *)text;
 @end
 
 NS_ASSUME_NONNULL_END

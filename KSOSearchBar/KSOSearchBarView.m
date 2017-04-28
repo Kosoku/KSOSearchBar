@@ -14,6 +14,7 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "KSOSearchBarView.h"
+#import "NSBundle+KSOSearchBarPrivateExtensions.h"
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
@@ -25,13 +26,16 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
 @interface KSOSearchBarView () <UITextFieldDelegate>
 @property (strong,nonatomic) UILabel *promptLabel;
 @property (strong,nonatomic) KDITextField *textField;
+@property (strong,nonatomic) UILabel *placeholderLabel;
 @property (strong,nonatomic) UIImageView *searchImageView;
 @property (strong,nonatomic) UIButton *clearButton;
+@property (strong,nonatomic) UIButton *cancelButton;
 @property (strong,nonatomic) UISegmentedControl *segmentedControl;
 
 - (void)_KSOSearchBarViewInit;
 - (CGSize)_sizeThatFits:(CGSize)size layout:(BOOL)layout;
 - (void)_updatePromptLabel;
+- (void)_updatePlaceholderLabel;
 - (void)_updateClearButton;
 + (UIColor *)_defaultPromptTextColor;
 @end
@@ -101,12 +105,16 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     [self setNeedsLayout];
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:1.0 initialSpringVelocity:0.1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         [self layoutIfNeeded];
+        [self _updatePlaceholderLabel];
+        [self.cancelButton setEnabled:YES];
     } completion:nil];
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
     [self setNeedsLayout];
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:1.0 initialSpringVelocity:0.1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         [self layoutIfNeeded];
+        [self _updatePlaceholderLabel];
+        [self.cancelButton setEnabled:NO];
     } completion:nil];
 }
 
@@ -130,6 +138,11 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
         [self invalidateIntrinsicContentSize];
     }
 }
+- (void)setPromptTextColor:(UIColor *)promptTextColor {
+    _promptTextColor = promptTextColor ?: [self.class _defaultPromptTextColor];
+    
+    [self _updatePromptLabel];
+}
 @dynamic text;
 - (NSString *)text {
     return self.textField.text;
@@ -137,12 +150,26 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
 - (void)setText:(NSString *)text {
     [self.textField setText:text];
     
+    [self _updatePlaceholderLabel];
     [self _updateClearButton];
 }
-- (void)setPromptTextColor:(UIColor *)promptTextColor {
-    _promptTextColor = promptTextColor ?: [self.class _defaultPromptTextColor];
+@dynamic placeholder;
+- (NSString *)placeholder {
+    return self.placeholderLabel.text;
+}
+- (void)setPlaceholder:(NSString *)placeholder {
+    BOOL placeholderWasVisible = self.placeholder.length > 0;
     
-    [self _updatePromptLabel];
+    [self.placeholderLabel setText:placeholder];
+    
+    if (placeholder.length > 0 && !placeholderWasVisible) {
+        [self addSubview:self.placeholderLabel];
+        [self setNeedsLayout];
+    }
+    else if (placeholder.length == 0 && placeholderWasVisible) {
+        [self.placeholderLabel removeFromSuperview];
+        [self setNeedsLayout];
+    }
 }
 - (void)setShowsScopeBar:(BOOL)showsScopeBar {
     if (_showsScopeBar == showsScopeBar) {
@@ -153,6 +180,10 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     
     if (_showsScopeBar) {
         [self addSubview:self.segmentedControl];
+        [self.segmentedControl removeAllSegments];
+        [self.segmentedControl insertSegmentWithTitle:@"Title" atIndex:0 animated:NO];
+        [self.segmentedControl insertSegmentWithTitle:@"Title" atIndex:1 animated:NO];
+        [self.segmentedControl setSelectedSegmentIndex:0];
         [self setNeedsLayout];
         [self invalidateIntrinsicContentSize];
     }
@@ -180,8 +211,25 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     
     [self.segmentedControl setSelectedSegmentIndex:0];
 }
+- (void)setShowsCancelButton:(BOOL)showsCancelButton {
+    if (_showsCancelButton == showsCancelButton) {
+        return;
+    }
+    
+    _showsCancelButton = showsCancelButton;
+    
+    if (_showsCancelButton) {
+        [self addSubview:self.cancelButton];
+        [self setNeedsLayout];
+    }
+    else {
+        [self.cancelButton removeFromSuperview];
+        [self setNeedsLayout];
+    }
+}
 #pragma mark *** Private Methods ***
 - (void)_KSOSearchBarViewInit; {
+    // sampled from UISearchBar
     [self setBackgroundColor:KDIColorHexadecimal(@"c9c9ce")];
     
     _promptTextColor = [self.class _defaultPromptTextColor];
@@ -201,9 +249,18 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     kstWeakify(self);
     [_textField KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
+        [self _updatePlaceholderLabel];
         [self _updateClearButton];
+        
+        if ([self.delegate respondsToSelector:@selector(searchBarView:textDidChange:)]) {
+            [self.delegate searchBarView:self textDidChange:self.text];
+        }
     } forControlEvents:UIControlEventEditingChanged];
     [self insertSubview:_textField belowSubview:_searchImageView];
+    
+    _placeholderLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    [_placeholderLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+    [_placeholderLabel setTextColor:UIColor.grayColor];
     
     _clearButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_clearButton setImage:[UIImage KSO_fontAwesomeImageWithString:@"\uf057" foregroundColor:UIColor.grayColor size:kIconSize] forState:UIControlStateNormal];
@@ -215,6 +272,16 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     [_textField setRightView:_clearButton];
     [_textField setRightViewMode:UITextFieldViewModeAlways];
     [_textField setRightViewEdgeInsets:UIEdgeInsetsMake(0, kSubviewMargin, 0, kSubviewMargin)];
+    
+    _cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [_cancelButton setEnabled:NO];
+    [_cancelButton.titleLabel setAdjustsFontForContentSizeCategory:YES];
+    [_cancelButton.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+    [_cancelButton setTitle:NSLocalizedStringWithDefaultValue(@"CANCEL_BUTTON_TITLE", nil, [NSBundle KSO_searchBarFrameworkBundle], @"Cancel", @"cancel button title") forState:UIControlStateNormal];
+    [_cancelButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        kstStrongify(self);
+        [self resignFirstResponder];
+    } forControlEvents:UIControlEventTouchUpInside];
     
     _segmentedControl = [[UISegmentedControl alloc] initWithFrame:CGRectZero];
     
@@ -240,26 +307,48 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     }
     
     if (layout) {
-        if (self.prompt.length > 0) {
-            [self.promptLabel setFrame:CGRectMake(kSubviewMargin, kSubviewMargin, CGRectGetWidth(self.bounds) - kSubviewMargin - kSubviewMargin, [self.promptLabel sizeThatFits:CGSizeZero].height)];
-        }
+        CGFloat frameY = kSubviewMargin;
         
         if (self.prompt.length > 0) {
-            [self.textField setFrame:CGRectMake(kSubviewMargin, CGRectGetMaxY(self.promptLabel.frame) + kSubviewMargin, CGRectGetWidth(self.bounds) - kSubviewMargin - kSubviewMargin, [self.textField sizeThatFits:CGSizeZero].height)];
+            [self.promptLabel setFrame:CGRectMake(kSubviewMargin, frameY, CGRectGetWidth(self.bounds) - kSubviewMargin - kSubviewMargin, [self.promptLabel sizeThatFits:CGSizeZero].height)];
+            
+            frameY = CGRectGetMaxY(self.promptLabel.frame) + kSubviewMargin;
         }
-        else {
-            [self.textField setFrame:CGRectMake(kSubviewMargin, kSubviewMargin, CGRectGetWidth(self.bounds) - kSubviewMargin - kSubviewMargin, [self.textField sizeThatFits:CGSizeZero].height)];
+        
+        if (self.showsCancelButton) {
+            CGSize cancelButtonSize = [self.cancelButton sizeThatFits:CGSizeZero];
+            
+            [self.cancelButton setFrame:CGRectMake(CGRectGetWidth(self.bounds) - cancelButtonSize.width - kSubviewMargin, frameY, cancelButtonSize.width, cancelButtonSize.height)];
         }
+        
+        [self.textField setFrame:CGRectMake(kSubviewMargin, frameY, self.showsCancelButton ? CGRectGetMinX(self.cancelButton.frame) - kSubviewMargin - kSubviewMargin : CGRectGetWidth(self.bounds) - kSubviewMargin - kSubviewMargin, [self.textField sizeThatFits:CGSizeZero].height)];
+        
+        frameY = CGRectGetMaxY(self.textField.frame) + kSubviewMargin;
         
         if (self.isFirstResponder) {
             [self.searchImageView setFrame:KSTCGRectCenterInRectVertically(CGRectMake(CGRectGetMinX(self.textField.frame) + kSubviewMargin, 0, CGRectGetWidth(self.searchImageView.frame), CGRectGetHeight(self.searchImageView.frame)), self.textField.frame)];
+            
+            if (self.placeholder.length > 0) {
+                CGSize placeholderSize = [self.placeholderLabel sizeThatFits:CGSizeZero];
+                
+                [self.placeholderLabel setFrame:KSTCGRectCenterInRectVertically(CGRectMake(CGRectGetMaxX(self.searchImageView.frame) + kSubviewMargin, 0, placeholderSize.width, placeholderSize.height), self.textField.frame)];
+            }
         }
         else {
-            [self.searchImageView setFrame:KSTCGRectCenterInRect(self.searchImageView.frame, self.textField.frame)];
+            if (self.placeholder.length > 0) {
+                CGSize placeholderSize = [self.placeholderLabel sizeThatFits:CGSizeZero];
+                CGRect rect = KSTCGRectCenterInRect(CGRectMake(0, 0, CGRectGetWidth(self.searchImageView.frame) + kSubviewMargin + placeholderSize.width, MAX(CGRectGetHeight(self.searchImageView.frame), placeholderSize.height)), self.textField.frame);
+                
+                [self.searchImageView setFrame:KSTCGRectCenterInRectVertically(CGRectMake(CGRectGetMinX(rect), 0, CGRectGetWidth(self.searchImageView.frame), CGRectGetHeight(self.searchImageView.frame)), rect)];
+                [self.placeholderLabel setFrame:KSTCGRectCenterInRectVertically(CGRectMake(CGRectGetMaxX(self.searchImageView.frame) + kSubviewMargin, 0, placeholderSize.width, placeholderSize.height), rect)];
+            }
+            else {
+                [self.searchImageView setFrame:KSTCGRectCenterInRect(self.searchImageView.frame, self.textField.frame)];
+            }
         }
         
         if (self.showsScopeBar) {
-            [self.segmentedControl setFrame:CGRectMake(kSubviewMargin, CGRectGetMaxY(self.textField.frame) + kSubviewMargin, CGRectGetWidth(self.bounds) - kSubviewMargin - kSubviewMargin, [self.segmentedControl sizeThatFits:CGSizeZero].height)];
+            [self.segmentedControl setFrame:CGRectMake(kSubviewMargin, frameY, CGRectGetWidth(self.bounds) - kSubviewMargin - kSubviewMargin, [self.segmentedControl sizeThatFits:CGSizeZero].height)];
         }
     }
     
@@ -269,6 +358,9 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     if (self.prompt.length > 0) {
         [self.promptLabel setAttributedText:[[NSAttributedString alloc] initWithString:self.prompt attributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote], NSForegroundColorAttributeName: self.promptTextColor, NSTextEffectAttributeName: NSTextEffectLetterpressStyle, NSParagraphStyleAttributeName: [NSParagraphStyle KDI_paragraphStyleWithCenterTextAlignment]}]];
     }
+}
+- (void)_updatePlaceholderLabel; {
+    [self.placeholderLabel setAlpha:self.text.length > 0 ? 0.0 : 1.0];
 }
 - (void)_updateClearButton; {
     [self.clearButton setAlpha:self.text.length > 0 ? 1.0 : 0.0];
