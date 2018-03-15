@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KSOSearchBar'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'KSOSearchBar is an alternative implementation of UISearchBar.'
 
 # This description is used to generate tags and improve search results.
