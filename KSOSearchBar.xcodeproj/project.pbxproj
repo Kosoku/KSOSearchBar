@@ -54,6 +54,12 @@
 		07E578351EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E578341EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework */; };
 		07E578361EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07E578341EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		07F3DBB21EB32A5D00BA2A2A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 077603F11EB2B632000298C3 /* Localizable.strings */; };
+		07FEAD7E205A0C9E005743FF /* Loki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07FEAD7D205A0C9E005743FF /* Loki.framework */; };
+		07FEAD7F205A0C9E005743FF /* Loki.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07FEAD7D205A0C9E005743FF /* Loki.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07FEAD81205A0CA8005743FF /* Loki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07FEAD80205A0CA8005743FF /* Loki.framework */; };
+		07FEAD82205A0CA8005743FF /* Loki.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07FEAD80205A0CA8005743FF /* Loki.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07FEAD83205A0CB0005743FF /* Loki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07FEAD84205A0CB0005743FF /* Loki.framework */; };
+		07FEAD85205A0CB6005743FF /* Loki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07FEAD86205A0CB6005743FF /* Loki.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +89,7 @@
 				077604381EB30D96000298C3 /* Stanley.framework in Embed Frameworks */,
 				077604351EB30D8E000298C3 /* Ditko.framework in Embed Frameworks */,
 				0776043A1EB30D9F000298C3 /* KSOSearchBar.framework in Embed Frameworks */,
+				07FEAD82205A0CA8005743FF /* Loki.framework in Embed Frameworks */,
 				077604311EB30D81000298C3 /* KSOFontAwesomeExtensions.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -97,6 +104,7 @@
 				07E5782F1EB25E42007687E8 /* KSOSearchBar.framework in Embed Frameworks */,
 				07E578291EB25E39007687E8 /* Ditko.framework in Embed Frameworks */,
 				07E5782D1EB25E3E007687E8 /* Stanley.framework in Embed Frameworks */,
+				07FEAD7F205A0C9E005743FF /* Loki.framework in Embed Frameworks */,
 				07E578361EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -159,6 +167,10 @@
 		07E5782B1EB25E3E007687E8 /* Stanley.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Stanley.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07E578321EB25EE7007687E8 /* KSOFontAwesomeExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KSOFontAwesomeExtensions.framework; path = "Vendor/KSOFontAwesomeExtensions/build/Debug-iphoneos/KSOFontAwesomeExtensions.framework"; sourceTree = "<group>"; };
 		07E578341EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOFontAwesomeExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07FEAD7D205A0C9E005743FF /* Loki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Loki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07FEAD80205A0CA8005743FF /* Loki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Loki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07FEAD84205A0CB0005743FF /* Loki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Loki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07FEAD86205A0CB6005743FF /* Loki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Loki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07FEAD85205A0CB6005743FF /* Loki.framework in Frameworks */,
 				077604231EB30730000298C3 /* Stanley.framework in Frameworks */,
 				077604211EB3072B000298C3 /* KSOFontAwesomeExtensions.framework in Frameworks */,
 				0776041F1EB30720000298C3 /* Ditko.framework in Frameworks */,
@@ -179,6 +192,7 @@
 				077604371EB30D96000298C3 /* Stanley.framework in Frameworks */,
 				077604341EB30D8E000298C3 /* Ditko.framework in Frameworks */,
 				077604391EB30D9F000298C3 /* KSOSearchBar.framework in Frameworks */,
+				07FEAD81205A0CA8005743FF /* Loki.framework in Frameworks */,
 				077604301EB30D81000298C3 /* KSOFontAwesomeExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,6 +201,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07FEAD83205A0CB0005743FF /* Loki.framework in Frameworks */,
 				07E578331EB25EE7007687E8 /* KSOFontAwesomeExtensions.framework in Frameworks */,
 				07E578261EB25E2E007687E8 /* Stanley.framework in Frameworks */,
 				07E578241EB25E29007687E8 /* Ditko.framework in Frameworks */,
@@ -200,6 +215,7 @@
 				07E5782E1EB25E42007687E8 /* KSOSearchBar.framework in Frameworks */,
 				07E578281EB25E39007687E8 /* Ditko.framework in Frameworks */,
 				07E5782C1EB25E3E007687E8 /* Stanley.framework in Frameworks */,
+				07FEAD7E205A0C9E005743FF /* Loki.framework in Frameworks */,
 				07E578351EB25EF3007687E8 /* KSOFontAwesomeExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,6 +336,10 @@
 		07E578221EB25E29007687E8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07FEAD80205A0CA8005743FF /* Loki.framework */,
+				07FEAD7D205A0C9E005743FF /* Loki.framework */,
+				07FEAD86205A0CB6005743FF /* Loki.framework */,
+				07FEAD84205A0CB0005743FF /* Loki.framework */,
 				077604361EB30D96000298C3 /* Stanley.framework */,
 				077604331EB30D8E000298C3 /* Ditko.framework */,
 				0776042F1EB30D81000298C3 /* KSOFontAwesomeExtensions.framework */,

@@ -20,7 +20,6 @@
 #import <Stanley/Stanley.h>
 #import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
 
-static NSString *const kCloseButtonString = @"\uf057";
 static CGFloat const kSubviewMargin = 8.0;
 #if (TARGET_OS_IOS)
 static CGSize const kIconSize = {.width=16.0, .height=16.0};
@@ -319,7 +318,7 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     _promptLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     
 #if (TARGET_OS_IOS)
-    _searchImageView = [[UIImageView alloc] initWithImage:[UIImage KSO_fontAwesomeImageWithIcon:KSOFontAwesomeIconSearch foregroundColor:_placeholderTextColor size:kIconSize]];
+    _searchImageView = [[UIImageView alloc] initWithImage:[UIImage KSO_fontAwesomeSolidImageWithString:@"\uf002" foregroundColor:_placeholderTextColor size:kIconSize]];
     [self addSubview:_searchImageView];
 #endif
     
@@ -359,7 +358,7 @@ static CGSize const kIconSize = {.width=16.0, .height=16.0};
     
 #if (TARGET_OS_IOS)
     _clearButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_clearButton setImage:[UIImage KSO_fontAwesomeImageWithString:kCloseButtonString foregroundColor:_placeholderTextColor size:kIconSize] forState:UIControlStateNormal];
+    [_clearButton setImage:[UIImage KSO_fontAwesomeSolidImageWithString:@"\uf057" foregroundColor:_placeholderTextColor size:kIconSize] forState:UIControlStateNormal];
     [_clearButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
         if ([self.delegate respondsToSelector:@selector(searchBarViewDidTapClearButton:)]) {
